@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+
+        <action name="index" class="com.prada.crud.actions.ListProductsAction">
+            <result name="success">/views/listProducts.jsp</result>
+        </action>
+
+        <!-- Acción para mostrar el formulario de agregar producto -->
+        <action name="addProductForm" class="com.prada.crud.actions.AddProductFormAction">
+            <result name="success">/views/productForm.jsp</result>
+            <result name="error">/views/error.jsp</result>
+            <param name="mode">add</param>
+            <param name="formAction">addProduct</param>
+        </action>
+
+        <!-- Acción para procesar la adición del producto -->
+        <action name="addProduct" class="com.prada.crud.actions.AddProductAction">
+            <result name="success" type="redirectAction">listProducts</result>
+            <result name="input">/views/productForm.jsp</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+        <!-- Acción para listar todos los productos -->
+        <action name="listProducts" class="com.prada.crud.actions.ListProductsAction">
+            <result name="success">/views/listProducts.jsp</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+        <!-- Acción para mostrar los datos existentes en el formulario de edición -->
+        <action name="editProduct" class="com.prada.crud.actions.EditProductAction">
+            <result name="success">/views/productForm.jsp</result>
+            <result name="error">/views/listProducts.jsp</result>
+            <param name="mode">edit</param>
+            <param name="formAction">updateProduct</param>
+        </action>
+
+        <!-- Acción para procesar la actualización del producto -->
+        <action name="updateProduct" class="com.prada.crud.actions.EditProductAction" method="update">
+            <result name="success" type="redirectAction">listProducts</result>
+            <result name="error">/views/error.jsp</result>
+            <result name="input">/views/productForm.jsp</result>
+        </action>
+
+        <!-- Acción para mostrar los datos existentes en el formulario de solo visualizar -->
+        <action name="viewProduct" class="com.prada.crud.actions.EditProductAction">
+            <result name="success">/views/productForm.jsp</result>
+            <result name="error">/views/listProducts.jsp</result>
+            <param name="mode">view</param>
+            <param name="formAction">viewProduct</param> <!-- Esta aqui solo para no enviar el valor nulo -->
+        </action>
+
+        <!-- Acción para procesar la adición del producto -->
+        <action name="deleteProduct" class="com.prada.crud.actions.DeleteProductAction">
+            <result name="success" type="redirectAction">listProducts</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+        <!-- Acción para listar todos los reviews -->
+        <action name="listReviews" class="com.prada.crud.actions.ListReviewsAction">
+            <result name="success">/views/listReviews.jsp</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+        <action name="addReviewForm" class="com.prada.crud.actions.AddReviewFormAction">
+            <result name="success">/views/reviewForm.jsp</result>
+            <result name="error">/views/error.jsp</result>
+            <param name="mode">add</param>
+            <param name="formAction">addReview</param>
+        </action>
+
+        <!-- Acción para mostrar los datos existentes en el formulario de edición -->
+        <action name="editReview" class="com.prada.crud.actions.EditReviewAction">
+            <result name="success">/views/reviewForm.jsp</result>
+            <result name="error">/views/listReviews.jsp</result>
+            <param name="mode">edit</param>
+            <param name="formAction">updateReview</param>
+        </action>
+
+        <!-- Acción para mostrar los datos existentes en el formulario de solo visualizar -->
+        <action name="viewReview" class="com.prada.crud.actions.EditReviewAction">
+            <result name="success">/views/reviewForm.jsp</result>
+            <result name="error">/views/listReviews.jsp</result>
+            <param name="mode">view</param>
+            <param name="formAction">viewReview</param> <!-- Esta aqui solo para no enviar el valor nulo -->
+        </action>
+
+        <action name="addReview" class="com.prada.crud.actions.AddReviewAction">
+            <result name="success" type="redirectAction">listReviews</result>
+            <result name="input">/views/reviewForm.jsp</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+
+        <!-- Acción para procesar la actualización del producto -->
+        <action name="updateReview" class="com.prada.crud.actions.EditReviewAction" method="update">
+            <result name="success" type="redirectAction">listReviews</result>
+            <result name="error">/views/error.jsp</result>
+            <result name="input">/views/reviewForm.jsp</result>
+        </action>
+
+        <!-- Acción para procesar la adición del producto -->
+        <action name="deleteReview" class="com.prada.crud.actions.DeleteReviewAction">
+            <result name="success" type="redirectAction">listReviews</result>
+            <result name="error">/views/error.jsp</result>
+        </action>
+
+        <action name="downloadPdf" class="com.prada.crud.actions.DownloadPdfAction">
+            <param name="productId">{1}</param>
+            <result type="stream">
+                <param name="contentType">application/pdf</param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>
